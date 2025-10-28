@@ -18,6 +18,7 @@ public class Instrutor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
     private String email;
     private String cnh;
@@ -25,6 +26,14 @@ public class Instrutor {
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
 
-    @EmbeddedId
+    @Embedded
     private Endereco endereco;
+
+    public Instrutor(DadosCadastroInstrutor dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.cnh = dados.cnh();
+        this.especialidade = dados.especialidade();
+        this.endereco = new Endereco(dados.endereco());
+    }
 }

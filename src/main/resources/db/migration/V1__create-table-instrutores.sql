@@ -13,5 +13,5 @@ CREATE TABLE INSTRUTORES
     uf            VARCHAR(2)   NOT NULL,
     cep           VARCHAR(8)   NOT NULL,
 
-    PRIMARY KEY (id),
-)
+    PRIMARY KEY (id)
+);
