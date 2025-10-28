@@ -4,6 +4,7 @@ import br.com.senai.auto_escola_n321.instrutor.DadosCadastroInstrutor;
 import br.com.senai.auto_escola_n321.instrutor.DadosListagemInstrutor;
 import br.com.senai.auto_escola_n321.instrutor.Instrutor;
 import br.com.senai.auto_escola_n321.instrutor.InstrutorRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ public class InstrutorController {
     private InstrutorRepository instrutorRepository;
 
     @PostMapping
+    @Transactional
     public void cadastrarInstrutor(@RequestBody @Valid DadosCadastroInstrutor dados) {
 
         instrutorRepository.save(new Instrutor(dados));

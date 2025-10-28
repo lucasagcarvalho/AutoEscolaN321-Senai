@@ -4,11 +4,12 @@ public record DadosListagemInstrutor(
         Long id,
         String nome,
         String email,
+        String telefone,
         String cnh,
         Especialidade especialidade
 ) {
 
     public DadosListagemInstrutor(Instrutor instrutor) {
-        this(instrutor.getId(), instrutor.getNome(), instrutor.getEmail(), instrutor.getCnh(), instrutor.getEspecialidade());
+        this(instrutor.getId(), instrutor.getNome(), instrutor.getEmail(), instrutor.getTelefone(),  instrutor.getCnh(), instrutor.getEspecialidade());
     }
 }
