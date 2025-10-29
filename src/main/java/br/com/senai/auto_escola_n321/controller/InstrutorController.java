@@ -36,4 +36,10 @@ public class InstrutorController {
 
         instrutor.atualizarInformacoes (dados);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void ExcluirInstrutor(@PathVariable Long id) {
+        instrutorRepository.deleteById(id);
+    }
 }
