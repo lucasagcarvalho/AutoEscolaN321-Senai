@@ -1,9 +1,6 @@
 package br.com.senai.auto_escola_n321.controller;
 
-import br.com.senai.auto_escola_n321.instrutor.DadosCadastroInstrutor;
-import br.com.senai.auto_escola_n321.instrutor.DadosListagemInstrutor;
-import br.com.senai.auto_escola_n321.instrutor.Instrutor;
-import br.com.senai.auto_escola_n321.instrutor.InstrutorRepository;
+import br.com.senai.auto_escola_n321.instrutor.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +27,13 @@ public class InstrutorController {
     @GetMapping
     public Page<DadosListagemInstrutor> listarInstrutores(@PageableDefault(size = 10, sort = {"nome"}) Pageable page, Sort sort) {
         return instrutorRepository.findAll(page).map(DadosListagemInstrutor::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void AtualizarInstrutor(@RequestBody @Valid DadosAtualizacaoInstrutor dados) {
+        Instrutor instrutor = instrutorRepository.getReferenceById(dados.id());
+
+        instrutor.atualizarInformacoes (dados);
     }
 }

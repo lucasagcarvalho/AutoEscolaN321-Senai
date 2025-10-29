@@ -1,5 +1,6 @@
 package br.com.senai.auto_escola_n321.instrutor;
 
+import br.com.senai.auto_escola_n321.endereco.DadosEndereco;
 import br.com.senai.auto_escola_n321.endereco.Endereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,5 +38,20 @@ public class Instrutor {
         this.cnh = dados.cnh();
         this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
+    }
+
+    public void atualizarInformacoes(DadosAtualizacaoInstrutor dados) {
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+        if (dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
+        if (dados.especialidade() != null) {
+            this.especialidade = dados.especialidade();
+        }
+        if (dados.endereco() != null) {
+            this.endereco.atualizarInfomacoes(endereco);
+        }
     }
 }
