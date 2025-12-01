@@ -58,8 +58,8 @@ public class AgendaDeInstrucoes {
             throw new InstrutorIndisponivelException("Não existe instrutor disponível nessa data e horário!");
         }
         Instrucao instrucao = instrucaoMapper.toEntity(aluno, instrutor, dados.data());
-        instrucaoRepository.save(instrucao);
-        return instrucaoMapper.toDetailsDTO(instrucao);
+        Instrucao saved = instrucaoRepository.save(instrucao);
+        return instrucaoMapper.toDetailsDTO(saved);
     }
 
     @Transactional
@@ -70,8 +70,8 @@ public class AgendaDeInstrucoes {
         Instrucao instrucao = instrucaoRepository.findById(dados.id())
                 .orElseThrow(() -> new InstrucaoNaoExisteException("ID da instrução informado não existe!"));
         instrucao.cancelar(dados.motivo());
-        instrucaoRepository.save(instrucao);
-        return instrucaoMapper.toDetailsCancelDTO(instrucao);
+        Instrucao saved = instrucaoRepository.save(instrucao);
+        return instrucaoMapper.toDetailsCancelDTO(saved);
     }
 
     private Instrutor escolherInstrutor(DadosAgendamentoInstrucao dados) {

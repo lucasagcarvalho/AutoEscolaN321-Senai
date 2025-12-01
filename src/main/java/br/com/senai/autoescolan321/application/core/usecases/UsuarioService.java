@@ -36,8 +36,8 @@ public class UsuarioService {
     @Transactional
     public DadosDetalhamentoUsuario cadastrar(DadosCadastroUsuario dados) {
         Usuario usuario = usuarioMapper.toEntity(dados);
-        usuarioRepository.save(usuario);
-        return usuarioMapper.toDetailsDTO(usuario);
+        Usuario saved = usuarioRepository.save(usuario);
+        return usuarioMapper.toDetailsDTO(saved);
     }
 
     public Page<DadosListagemUsuario> listar(Pageable paginacao) {
@@ -50,8 +50,8 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(dados.id())
                 .orElseThrow(() -> new UsuarioNaoExisteException("ID do usuário informado não existe!"));
         usuario.setPerfil(dados.perfil());
-        usuarioRepository.save(usuario);
-        return usuarioMapper.toDetailsDTO(usuario);
+        Usuario saved = usuarioRepository.save(usuario);
+        return usuarioMapper.toDetailsDTO(saved);
     }
 
     @Transactional
@@ -73,8 +73,8 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNaoExisteException("ID do usuario informado não existe!"));
         usuario.setAtivo(false);
-        usuarioRepository.save(usuario);
-        return usuarioMapper.toDetailsDTO(usuario);
+        Usuario saved = usuarioRepository.save(usuario);
+        return usuarioMapper.toDetailsDTO(saved);
     }
 
     public DadosDetalhamentoUsuario detalhar(Long id) {

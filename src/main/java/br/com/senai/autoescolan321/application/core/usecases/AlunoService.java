@@ -28,8 +28,8 @@ public class AlunoService {
     @Transactional
     public DadosDetalhamentoAluno cadastrar(DadosCadastroAluno dados) {
         Aluno aluno = alunoMapper.toEntity(dados);
-        alunoRepository.save(aluno);
-        return alunoMapper.toDetailsDTO(aluno);
+        Aluno saved = alunoRepository.save(aluno);
+        return alunoMapper.toDetailsDTO(saved);
     }
 
     public Page<DadosListagemAluno> listar(Pageable paginacao) {
@@ -42,8 +42,8 @@ public class AlunoService {
         Aluno aluno = alunoRepository.findById(dados.id())
                 .orElseThrow(() -> new AlunoNaoExisteException("ID do aluno informado não existe!"));
         alunoMapper.updateEntityFromDTO(dados, aluno);
-        alunoRepository.save(aluno);
-        return alunoMapper.toDetailsDTO(aluno);
+        Aluno saved = alunoRepository.save(aluno);
+        return alunoMapper.toDetailsDTO(saved);
     }
 
     @Transactional
@@ -51,8 +51,8 @@ public class AlunoService {
         Aluno aluno = alunoRepository.findById(id)
                 .orElseThrow(() -> new AlunoNaoExisteException("ID do aluno informado não existe!"));
         aluno.setAtivo(false);
-        alunoRepository.save(aluno);
-        return alunoMapper.toDetailsDTO(aluno);
+        Aluno saved = alunoRepository.save(aluno);
+        return alunoMapper.toDetailsDTO(saved);
     }
 
     public DadosDetalhamentoAluno detalhar(Long id) {

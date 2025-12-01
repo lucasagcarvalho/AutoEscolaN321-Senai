@@ -6,7 +6,9 @@ import br.com.senai.autoescolan321.adapters.in.controller.response.usuario.Dados
 import br.com.senai.autoescolan321.adapters.in.controller.response.usuario.DadosListagemUsuario;
 import br.com.senai.autoescolan321.adapters.in.controller.request.usuario.DadosAtualizacaoPerfil;
 import br.com.senai.autoescolan321.application.core.usecases.UsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,6 +22,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/usuarios")
+@SecurityRequirement(name = "bearer-key")
 public class UsuarioController {
     private final UsuarioService usuarioService;
 
@@ -42,7 +45,7 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemUsuario>> listarUsuarios(
-            @PageableDefault(size = 10, sort = {"login"}) Pageable paginacao) {
+            @ParameterObject @PageableDefault(size = 10, sort = {"login"}) Pageable paginacao) {
         return ResponseEntity.ok(usuarioService.listar(paginacao));
     }
 

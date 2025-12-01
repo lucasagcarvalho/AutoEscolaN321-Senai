@@ -28,8 +28,8 @@ public class InstrutorService {
     @Transactional
     public DadosDetalhamentoInstrutor cadastrar(DadosCadastroInstrutor dados) {
         Instrutor instrutor = instrutorMapper.toEntity(dados);
-        instrutorRepository.save(instrutor);
-        return instrutorMapper.toDetailsDTO(instrutor);
+        Instrutor saved = instrutorRepository.save(instrutor);
+        return instrutorMapper.toDetailsDTO(saved);
     }
 
     public Page<DadosListagemInstrutor> listar(Pageable paginacao) {
@@ -43,8 +43,8 @@ public class InstrutorService {
                 .orElseThrow(() -> new InstrutorNaoExisteException("ID do instrutor informado não existe!"));
         //instrutor.atualizarInformacoes(dados);
         instrutorMapper.updateEntityFromDTO(dados, instrutor);
-        instrutorRepository.save(instrutor);
-        return instrutorMapper.toDetailsDTO(instrutor);
+        Instrutor saved = instrutorRepository.save(instrutor);
+        return instrutorMapper.toDetailsDTO(saved);
     }
 
     @Transactional
@@ -52,8 +52,8 @@ public class InstrutorService {
         Instrutor instrutor = instrutorRepository.findById(id)
                 .orElseThrow(() -> new InstrutorNaoExisteException("ID do instrutor informado não existe!"));
         instrutor.setAtivo(false);
-        instrutorRepository.save(instrutor);
-        return instrutorMapper.toDetailsDTO(instrutor);
+        Instrutor saved = instrutorRepository.save(instrutor);
+        return instrutorMapper.toDetailsDTO(saved);
     }
 
     public DadosDetalhamentoInstrutor detalhar(Long id) {

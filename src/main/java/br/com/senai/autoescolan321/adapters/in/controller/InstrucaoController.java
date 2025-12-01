@@ -5,12 +5,14 @@ import br.com.senai.autoescolan321.adapters.in.controller.request.instrucao.Dado
 import br.com.senai.autoescolan321.adapters.in.controller.response.instrucao.DadosDetalhamentoCancelamento;
 import br.com.senai.autoescolan321.adapters.in.controller.response.instrucao.DadosDetalhamentoInstrucao;
 import br.com.senai.autoescolan321.application.core.usecases.AgendaDeInstrucoes;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/instrucoes")
+@SecurityRequirement(name = "bearer-key")
 public class InstrucaoController {
     private final AgendaDeInstrucoes agenda;
 
