@@ -1,4 +1,4 @@
-package br.com.senai.autoescolan321.adapters.in.controller.response.viacep;
+package br.com.senai.autoescolan321.adapters.inviacep.dto;
 
 public record DadosEnderecoViaCEPResponse(
         String logradouro,

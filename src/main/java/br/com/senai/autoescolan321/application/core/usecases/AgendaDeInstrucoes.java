@@ -9,8 +9,10 @@ import br.com.senai.autoescolan321.application.core.domain.model.Aluno;
 import br.com.senai.autoescolan321.application.core.domain.model.Instrucao;
 import br.com.senai.autoescolan321.application.core.domain.model.Instrutor;
 import br.com.senai.autoescolan321.application.ports.out.AlunoRepository;
+import br.com.senai.autoescolan321.application.ports.out.EmailEventPublisher;
 import br.com.senai.autoescolan321.application.ports.out.InstrucaoRepository;
 import br.com.senai.autoescolan321.application.ports.out.InstrutorRepository;
+import br.com.senai.autoescolan321.application.services.EmailNotificacaoService;
 import br.com.senai.autoescolan321.exception.types.instrucao.InstrucaoNaoExisteException;
 import br.com.senai.autoescolan321.application.core.validations.instrucao.interfaces.ValidadoresAgendamento;
 import br.com.senai.autoescolan321.application.core.validations.instrucao.interfaces.ValidadoresCancelamento;
@@ -30,6 +32,7 @@ public class AgendaDeInstrucoes {
     private final InstrucaoMapper instrucaoMapper;
     private final List<ValidadoresAgendamento> validadoresAgendamento;
     private final List<ValidadoresCancelamento> validadoresCancelamento;
+    private final EmailNotificacaoService emailNotificacaoService;
 
     public AgendaDeInstrucoes(
             AlunoRepository alunoRepository,
@@ -37,13 +40,15 @@ public class AgendaDeInstrucoes {
             InstrucaoRepository instrucaoRepository,
             InstrucaoMapper instrucaoMapper,
             List<ValidadoresAgendamento> validadoresAgendamento,
-            List<ValidadoresCancelamento> validadoresCancelamento) {
+            List<ValidadoresCancelamento> validadoresCancelamento,
+    EmailNotificacaoService emailNotificacaoService) {
         this.alunoRepository = alunoRepository;
         this.instrutorRepository = instrutorRepository;
         this.instrucaoRepository = instrucaoRepository;
         this.instrucaoMapper = instrucaoMapper;
         this.validadoresAgendamento = validadoresAgendamento;
         this.validadoresCancelamento = validadoresCancelamento;
+        this.emailNotificacaoService = emailNotificacaoService;
     }
 
     @Transactional
@@ -59,6 +64,7 @@ public class AgendaDeInstrucoes {
         }
         Instrucao instrucao = instrucaoMapper.toEntity(aluno, instrutor, dados.data());
         Instrucao saved = instrucaoRepository.save(instrucao);
+        emailNotificacaoService.enviarNotificacao(saved, "agendada");
         return instrucaoMapper.toDetailsDTO(saved);
     }
 
@@ -71,6 +77,7 @@ public class AgendaDeInstrucoes {
                 .orElseThrow(() -> new InstrucaoNaoExisteException("ID da instrução informado não existe!"));
         instrucao.cancelar(dados.motivo());
         Instrucao saved = instrucaoRepository.save(instrucao);
+        emailNotificacaoService.enviarNotificacao(saved, "cancelada");
         return instrucaoMapper.toDetailsCancelDTO(saved);
     }
 

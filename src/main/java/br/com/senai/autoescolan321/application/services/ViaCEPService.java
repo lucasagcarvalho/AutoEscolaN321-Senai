@@ -1,6 +1,6 @@
-package br.com.senai.autoescolan321.application.core.usecases;
+package br.com.senai.autoescolan321.application.services;
 
-import br.com.senai.autoescolan321.adapters.in.controller.response.viacep.DadosEnderecoViaCEPResponse;
+import br.com.senai.autoescolan321.adapters.inviacep.dto.DadosEnderecoViaCEPResponse;
 import br.com.senai.autoescolan321.adapters.out.viacep.mapper.ViaCEPMapper;
 import br.com.senai.autoescolan321.application.core.domain.vo.Endereco;
 import br.com.senai.autoescolan321.application.ports.out.ViaCEPPort;

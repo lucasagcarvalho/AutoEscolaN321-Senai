@@ -1,8 +1,8 @@
 package br.com.senai.autoescolan321.adapters.out.viacep.mapper;
 
 import br.com.senai.autoescolan321.adapters.in.controller.request.endereco.DadosEndereco;
-import br.com.senai.autoescolan321.adapters.in.controller.response.viacep.DadosEnderecoViaCEPResponse;
-import br.com.senai.autoescolan321.adapters.in.controller.response.viacep.DadosViaCEPResponse;
+import br.com.senai.autoescolan321.adapters.inviacep.dto.DadosEnderecoViaCEPResponse;
+import br.com.senai.autoescolan321.adapters.inviacep.dto.DadosViaCEPResponse;
 import br.com.senai.autoescolan321.application.core.domain.vo.Endereco;
 import org.springframework.stereotype.Component;
 

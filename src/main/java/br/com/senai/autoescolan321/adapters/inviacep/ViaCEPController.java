@@ -1,7 +1,7 @@
-package br.com.senai.autoescolan321.adapters.in.controller;
+package br.com.senai.autoescolan321.adapters.inviacep;
 
-import br.com.senai.autoescolan321.adapters.in.controller.response.viacep.DadosEnderecoViaCEPResponse;
-import br.com.senai.autoescolan321.application.core.usecases.ViaCEPService;
+import br.com.senai.autoescolan321.adapters.inviacep.dto.DadosEnderecoViaCEPResponse;
+import br.com.senai.autoescolan321.application.services.ViaCEPService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
